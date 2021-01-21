@@ -1,12 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useRouteMatch } from 'react-router-dom';
 import { FiChevronRight, FiChevronLeft } from 'react-icons/fi';
+import { useTransition } from 'react-spring';
 
 import api from '../../services/api';
 
 import logo from '../../assets/logo.svg';
 
-import { Header, UserInfo, Repositories } from './styles';
+import { Header, UserInfo, Repositories, RepoLink } from './styles'; // eslint-disable-line
 
 interface UserParams {
   user: string;
@@ -44,6 +45,12 @@ const User: React.FC = () => {
     });
   }, [params.user]);
 
+  const reposWithTransition = useTransition(repos, repo => repo.id, {
+    from: { zoom: 0, opacity: 0 },
+    enter: { zoom: 1, opacity: 1 },
+    leave: { zoom: 0, opacity: 0 },
+  });
+
   return (
     <>
       <Header>
@@ -79,14 +86,19 @@ const User: React.FC = () => {
             </ul>
           </UserInfo>
           <Repositories>
-            {repos.map(repo => (
-              <a key={repo.id} href={repo.html_url}>
+            {reposWithTransition.map(({ item, props, key }) => (
+              <RepoLink
+                style={props}
+                key={key}
+                href={item.html_url}
+                target="_blanck"
+              >
                 <div>
-                  <strong>{repo.name}</strong>
-                  <p>{repo.description}</p>
+                  <strong>{item.name}</strong>
+                  <p>{item.description}</p>
                 </div>
                 <FiChevronRight size={20} />
-              </a>
+              </RepoLink>
             ))}
           </Repositories>
         </>

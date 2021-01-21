@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 import { shade } from 'polished';
+import { animated } from 'react-spring';
 
 export const Title = styled.h1`
   font-weight: bold;
@@ -70,61 +71,61 @@ export const Form = styled.form`
 export const Repositories = styled.div`
   margin-top: 34px;
   max-width: 714px;
+`;
 
-  a {
-    display: flex;
+export const Link = styled(animated.a)`
+  display: flex;
 
-    align-items: center;
+  align-items: center;
 
-    height: 112px;
-    width: flex 1;
-    padding: 16px;
+  height: 112px;
+  width: flex 1;
+  padding: 16px;
 
-    background-color: #fff;
+  background-color: #fff;
 
-    text-decoration: none;
+  text-decoration: none;
 
-    border-radius: 16px;
-    margin-bottom: 16px;
+  border-radius: 16px;
+  margin-bottom: 16px;
 
-    transition: 0.3s;
+  transition: 0.3s;
 
-    :hover {
-      margin-right: -20px;
-      margin-left: 20px;
+  :hover {
+    margin-right: -20px;
+    margin-left: 20px;
+  }
+  img {
+    height: 80px;
+    width: 80px;
+    border-radius: 50%;
+  }
+
+  div {
+    margin-left: 24px;
+
+    flex: 1;
+
+    strong {
+      font-weight: bold;
+      font-size: 24px;
+      line-height: 28px;
+
+      color: #3d3d4d;
     }
-    img {
-      height: 80px;
-      width: 80px;
-      border-radius: 50%;
-    }
+    p {
+      font-size: 18px;
+      line-height: 21px;
 
-    div {
-      margin-left: 24px;
+      color: #a8a8b3;
 
-      flex: 1;
-
-      strong {
-        font-weight: bold;
-        font-size: 24px;
-        line-height: 28px;
-
-        color: #3d3d4d;
+      span + span {
+        margin-left: 10px;
       }
-      p {
-        font-size: 18px;
-        line-height: 21px;
-
-        color: #a8a8b3;
-
-        span + span {
-          margin-left: 10px;
-        }
-      }
     }
+  }
 
-    svg {
-      margin-left: auto;
-    }
+  svg {
+    margin-left: auto;
   }
 `;

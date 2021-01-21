@@ -1,11 +1,12 @@
 import React, { useState, useCallback, FormEvent, useEffect } from 'react'; // eslint-disable-line
 import { FiChevronRight } from 'react-icons/fi';
-import { Link } from 'react-router-dom';
+
+import { useTransition } from 'react-spring';
 
 import logo from '../../assets/logo.svg';
 import api from '../../services/api';
 
-import { Title, Form, Repositories, Error } from './styles'; // eslint-disable-line
+import { Title, Form, Repositories, Error, Link } from './styles'; // eslint-disable-line
 
 interface Content {
   id: number;
@@ -79,6 +80,12 @@ const Dashboard: React.FC = () => {
     },
     [newRepository, newUser, content],
   );
+
+  const contentWithTransition = useTransition(content, item => item.id, {
+    from: { zoom: 0, opacity: 0 },
+    enter: { zoom: 1, opacity: 1 },
+    leave: { zoom: 0, opacity: 0 },
+  });
   return (
     <>
       <img alt="GitHub_explorer" src={logo} />
@@ -99,36 +106,40 @@ const Dashboard: React.FC = () => {
       {inputError && <Error>{inputError}</Error>}
 
       <Repositories>
-        {content.map(data => {
-          if (data.full_name) {
+        {contentWithTransition.map(({ item, props, key }) => {
+          if (item.full_name) {
             return (
-              <Link key={data.id} to={`/repositories/${data.full_name}`}>
-                <img src={data.owner?.avatar_url} alt={data.owner?.login} />
+              <Link
+                style={props}
+                key={key}
+                href={`/repositories/${item.full_name}`}
+              >
+                <img src={item.owner?.avatar_url} alt={item.owner?.login} />
                 <div>
-                  <strong>{data.full_name}</strong>
-                  <p>{data.description}</p>
+                  <strong>{item.full_name}</strong>
+                  <p>{item.description}</p>
                 </div>
                 <FiChevronRight size={20} />
               </Link>
             );
           }
           return (
-            <Link key={data.id} to={`/users/${data.login}`}>
-              <img src={data.avatar_url} alt={data.login} />
+            <Link style={props} key={key} href={`/users/${item.login}`}>
+              <img src={item.avatar_url} alt={item.login} />
               <div>
-                <strong>{data.login}</strong>
+                <strong>{item.login}</strong>
                 <p>
                   <span>
                     Following:
-                    {data.following}
+                    {item.following}
                   </span>
                   <span>
                     Followers:
-                    {data.followers}
+                    {item.followers}
                   </span>
                   <span>
                     Repositórios públicos:
-                    {data.public_repos}
+                    {item.public_repos}
                   </span>
                 </p>
               </div>

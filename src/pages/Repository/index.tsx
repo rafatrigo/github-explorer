@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import { useRouteMatch, Link } from 'react-router-dom';
 import { FiChevronLeft, FiChevronRight } from 'react-icons/fi';
+import { useTransition } from 'react-spring';
 import logo from '../../assets/logo.svg';
 import api from '../../services/api';
 
-import { Header, RepositoryInfo, Issues } from './styles';
+import { Header, RepositoryInfo, Issues, IssueLink } from './styles'; // eslint-disable-line
 
 interface RepositoryParams {
   repository: string;
@@ -47,6 +48,12 @@ const Repositories: React.FC = () => {
     });
   }, [params.repository]);
 
+  const issuesWithTransition = useTransition(issues, issue => issue.id, {
+    from: { zoom: 0, opacity: 0 },
+    enter: { zoom: 1, opacity: 1 },
+    leave: { zoom: 0, opacity: 0 },
+  });
+
   return (
     <>
       <Header>
@@ -85,14 +92,19 @@ const Repositories: React.FC = () => {
         </RepositoryInfo>
       )}
       <Issues>
-        {issues.map(issue => (
-          <a key={issue.id} href={issue.html_url}>
+        {issuesWithTransition.map(({ item, props, key }) => (
+          <IssueLink
+            style={props}
+            key={key}
+            href={item.html_url}
+            target="_blanck"
+          >
             <div>
-              <strong>{issue.title}</strong>
-              <p>{issue.user.login}</p>
+              <strong>{item.title}</strong>
+              <p>{item.user.login}</p>
             </div>
             <FiChevronRight size={20} />
-          </a>
+          </IssueLink>
         ))}
       </Issues>
     </>

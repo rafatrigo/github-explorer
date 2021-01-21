@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { animated } from 'react-spring';
 
 export const Header = styled.header`
   display: flex;
@@ -81,51 +82,51 @@ export const RepositoryInfo = styled.section`
 
 export const Issues = styled.div`
   margin-top: 34px;
+`;
 
-  a {
-    display: flex;
+export const IssueLink = styled(animated.a)`
+  display: flex;
 
-    align-items: center;
+  align-items: center;
 
-    height: 112px;
-    width: flex 1;
-    padding: 16px;
+  height: 112px;
+  width: flex 1;
+  padding: 16px;
 
-    background-color: #fff;
+  background-color: #fff;
 
-    text-decoration: none;
+  text-decoration: none;
 
-    border-radius: 16px;
-    margin-bottom: 16px;
+  border-radius: 16px;
+  margin-bottom: 16px;
 
-    transition: 0.3s;
+  transition: 0.3s;
 
-    :hover {
-      margin-right: -20px;
-      margin-left: 20px;
+  :hover {
+    margin-right: -20px;
+    margin-left: 20px;
+  }
+
+  div {
+    margin-left: 24px;
+
+    flex: 1;
+
+    strong {
+      font-weight: bold;
+      font-size: 24px;
+      line-height: 28px;
+
+      color: #3d3d4d;
     }
+    p {
+      font-size: 18px;
+      line-height: 21px;
 
-    div {
-      margin-left: 24px;
+      color: #a8a8b3;
 
-      flex: 1;
-
-      strong {
-        font-weight: bold;
-        font-size: 24px;
-        line-height: 28px;
-
-        color: #3d3d4d;
-      }
-      p {
-        font-size: 18px;
-        line-height: 21px;
-
-        color: #a8a8b3;
-
-        span + span {
-          margin-left: 10px;
-        }
+      span + span {
+        margin-left: 10px;
       }
     }
   }
