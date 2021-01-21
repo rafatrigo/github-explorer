@@ -78,6 +78,39 @@ export const RepositoryInfo = styled.section`
       margin-left: 80px;
     }
   }
+  @media (max-width: 580px) {
+    header div {
+      strong {
+        font-size: 28px;
+        line-height: 34px;
+      }
+
+      p {
+        font-size: 16px;
+        line-height: 19px;
+      }
+    }
+  }
+
+  @media (max-width: 500px) {
+    ul {
+      li {
+        strong {
+          font-size: 24px;
+        }
+      }
+      li + li {
+        margin-left: 50px;
+      }
+    }
+  }
+
+  @media (max-width: 415px) {
+    header img {
+      height: 90px;
+      width: 90px;
+    }
+  }
 `;
 
 export const Issues = styled.div`
@@ -127,6 +160,17 @@ export const IssueLink = styled(animated.a)`
 
       span + span {
         margin-left: 10px;
+      }
+    }
+  }
+
+  @media (max-width: 480px) {
+    div {
+      max-height: 100%;
+      overflow: hidden;
+      strong {
+        font-size: 20px;
+        line-height: 24px;
       }
     }
   }
