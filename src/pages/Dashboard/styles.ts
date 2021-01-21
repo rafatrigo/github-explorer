@@ -10,6 +10,16 @@ export const Title = styled.h1`
   margin-top: 45px;
 
   color: #3a3a3a;
+
+  @media (max-width: 490px) {
+    font-size: 36px;
+    line-height: 44px;
+  }
+
+  @media (max-width: 380px) {
+    font-size: 26px;
+    line-height: 34px;
+  }
 `;
 
 export const Error = styled.span`
@@ -26,8 +36,11 @@ export const Form = styled.form`
   margin-top: 40px;
 
   input {
-    width: 250px;
+    display: flex;
+    max-width: 250px;
     height: 50px;
+
+    width: 100%;
 
     border-radius: 30px 0 0 30px;
     border: none;
@@ -48,7 +61,9 @@ export const Form = styled.form`
   }
 
   button {
-    width: 210px;
+    min-width: 120px;
+    max-width: 210px;
+    width: 100%;
     height: 50px;
 
     border: none;
@@ -64,6 +79,28 @@ export const Form = styled.form`
     :hover {
       background-color: ${shade(0.3, '#04d361')};
       font-size: 18px;
+    }
+  }
+
+  @media (max-width: 620px) {
+    flex-direction: column;
+    margin: 40px 20px 0 20px;
+
+    input:first-child {
+      border-radius: 20px 20px 0 0;
+    }
+
+    input {
+      max-width: 100%;
+
+      & + input {
+        margin: 14px 0 14px 0;
+      }
+    }
+
+    button {
+      max-width: 100%;
+      border-radius: 0 0 20px 20px;
     }
   }
 `;
@@ -95,6 +132,7 @@ export const Link = styled(animated.a)`
     margin-right: -20px;
     margin-left: 20px;
   }
+
   img {
     height: 80px;
     width: 80px;
@@ -127,5 +165,39 @@ export const Link = styled(animated.a)`
 
   svg {
     margin-left: auto;
+  }
+
+  @media (max-width: 620px) {
+    padding: 14px;
+    img {
+      height: 60px;
+      width: 60px;
+    }
+  }
+
+  @media (max-width: 595px) {
+    div {
+      height: 100%;
+      strong {
+        font-size: 22px;
+        line-height: 26px;
+      }
+
+      p {
+        display: flex;
+        flex-direction: column;
+        span + span {
+          margin: 0;
+        }
+
+        span:last-child {
+          padding-bottom: 5px;
+        }
+      }
+    }
+  }
+
+  @media (max-width: 500px) {
+    overflow: hidden;
   }
 `;
