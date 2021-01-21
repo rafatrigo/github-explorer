@@ -78,6 +78,19 @@ export const UserInfo = styled.section`
       margin-left: 80px;
     }
   }
+
+  @media (max-width: 510px) {
+    ul {
+      li {
+        strong {
+          font-size: 28px;
+        }
+      }
+      li + li {
+        margin-left: 50px;
+      }
+    }
+  }
 `;
 
 export const Repositories = styled.div`
