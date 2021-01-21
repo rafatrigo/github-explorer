@@ -25,6 +25,7 @@
     "@typescript-eslint"
   ],
   "rules": {
+    "arrow-parens": ["error", "as-needed"],
     "prettier/prettier": "error",
     "no-use-before-define": "off",
     "react-hooks/rules-of-hooks": "error",
